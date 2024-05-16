@@ -3,13 +3,21 @@ package main
 import "fmt"
 
 type Door struct {
-    KnockSound, OpenSound string
+	Side string
 }
 
-func (d Door) Knock() {
-    fmt.Println(d.KnockSound)
+func (door *Door) Tap() {
+	if door.Side == "Kanan" {
+		fmt.Println("Knock")
+	} else {
+		fmt.Println("Beep")
+	}
 }
 
-func (d Door) Open() {
-    fmt.Println(d.OpenSound)
+func (door *Door) Open() {
+	if door.Side == "Kanan" {
+		fmt.Println("Beep")
+	} else {
+		fmt.Println("Knock")
+	}
 }

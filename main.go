@@ -1,31 +1,34 @@
 package main
 
-import (
-    "fmt"
-    "golang-training/car"
-)
+import "fmt"
 
 func main() {
-    // Buat mobil baru
-    myCar := car.NewCar()
+	car := Car{
+		Wheels: [4]Wheel{
+			{Type: ""},
+			{Type: ""},
+			{Type: ""},
+			{Type: ""},
+		},
+		Doors: [2]Door{
+			{Side: "Kanan"},
+			{Side: "Kiri"},
+		},
+	}
 
-    // Ganti roda
-    myCar.ReplaceWheel(0, car.WoodWheel{})
-    myCar.ReplaceWheel(1, car.IronWheel{})
-    myCar.ReplaceWheel(2, car.RubberWheel{})
-    myCar.ReplaceWheel(3, car.WoodWheel{})
+	car.Wheels[0] = Wheel{Type: "Karet"}
+	car.Wheels[1] = Wheel{Type: "Kayu"}
+	car.Wheels[2] = Wheel{Type: "Besi"}
+	car.Wheels[3] = Wheel{Type: "Plastik"}
 
-    // Tampilkan tipe roda
-    for i, wheel := range myCar.Wheels {
-        fmt.Printf("Wheel %d: %s\n", i+1, wheel.Type())
-    }
+	for i, wheel := range car.Wheels {
+		fmt.Printf("Roda %d diganti dengan ban berjenis %s\n", i+1, wheel.Type)
+	}
 
-    // Ketuk dan buka pintu
-    fmt.Println("Knocking and opening right door:")
-    myCar.RightDoor.Knock()
-    myCar.RightDoor.Open()
-
-    fmt.Println("Knocking and opening left door:")
-    myCar.LeftDoor.Knock()
-    myCar.LeftDoor.Open()
+	for _, door := range car.Doors {
+		fmt.Printf("Mengetuk pintu %s berbunyi ", door.Side)
+		door.Tap()
+		fmt.Printf("Membuka pintu %s berbunyi ", door.Side)
+		door.Open()
+	}
 }
